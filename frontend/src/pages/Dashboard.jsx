@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { generateStory } from "../api/api";
+import StoryViewer from "../components/StoryViewer";
 
 export default function Dashboard({ user }) {
     const [errorText, setErrorText] = useState("");
@@ -39,18 +40,7 @@ export default function Dashboard({ user }) {
 
             <button onClick={handleGenerate}>Generate</button>
 
-            {story && (
-                <div>
-                    <h3>{story.title}</h3>
-                    <p>{story.story}</p>
-                    {story.explanation && (
-                        <>
-                            <h4>Technical Explanation</h4>
-                            <p>{story.explanation}</p>
-                        </>
-                    )}
-                </div>
-            )}
+            {story && <StoryViewer story={story} />}
         </div>
     );
 }
