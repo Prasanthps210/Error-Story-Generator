@@ -59,7 +59,6 @@ public class StoryService {
                 story = result.get("story");
                 explanation = result.get("fix");
 
-                // Optional: store example somewhere if you add a column later
                 String example = result.get("example");
                 System.out.println("Example Code: " + example);
 

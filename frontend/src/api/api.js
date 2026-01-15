@@ -18,11 +18,14 @@ export async function register(user) {
         body: JSON.stringify(user),
     });
 
+    const text = await res.text();
+
     if (!res.ok) {
-        throw new Error("Registration failed");
+        throw new Error(text);
     }
 
-    return res.json();
+   // return res.json();
+    return JSON.parse(text);
 }
 
 export async function login(credentials) {
@@ -32,11 +35,14 @@ export async function login(credentials) {
         body: JSON.stringify(credentials),
     });
 
+    const text = await res.text();
+
     if (!res.ok) {
-        throw new Error("Login failed");
+        throw new Error(text);
     }
 
-    return res.json();
+ //   return res.json();
+    return JSON.parse(text);
 }
 
 // ---------- STORY ----------

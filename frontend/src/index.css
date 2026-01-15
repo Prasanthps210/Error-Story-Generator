@@ -88,3 +88,15 @@ hr {
   cursor: pointer;
   padding: 0;
 }
+
+.generator-box {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;        /* 🔥 This is the spacing */
+  margin-top: 20px;
+}
+
+.loading-text {
+  color: #93c5fd;
+  font-size: 14px;
+}

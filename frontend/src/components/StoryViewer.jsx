@@ -17,7 +17,7 @@ function StoryViewer({ story }) {
             {story.explanation && (
                 <>
                     <hr />
-                    <h3>🧠 Explanation</h3>
+                    <h3>Explanation</h3>
                     <p>{story.explanation}</p>
                 </>
             )}

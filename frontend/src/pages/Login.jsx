@@ -16,7 +16,7 @@ export default function Login({ setUser, setPage }) {
             setUser(data.user);
             setPage("dashboard");
         } catch (e) {
-            alert("Invalid credentials");
+            alert(e.message);
         }
     };
 

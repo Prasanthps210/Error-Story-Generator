@@ -11,10 +11,4 @@ public interface ErrorStoryRepository extends JpaRepository<ErrorStory, Long> {
     // Fetch all stories for a particular user (their bookshelf)
     List<ErrorStory> findByUser(User user);
 
-    // CRUD already included:
-    // save(ErrorStory s)
-    // findById(Long id)
-    // findAll()
-    // delete(ErrorStory s)
-    // deleteById(Long id)
 }

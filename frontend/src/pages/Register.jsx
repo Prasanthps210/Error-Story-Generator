@@ -13,8 +13,8 @@ export default function Register({ setPage }) {
             await register(form);
             alert("Registration successful!");
             setPage("login");
-        } catch {
-            alert("Registration failed");
+        } catch(e) {
+            alert(e.message);
         }
     };
 

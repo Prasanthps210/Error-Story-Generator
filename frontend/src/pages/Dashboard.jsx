@@ -6,9 +6,13 @@ export default function Dashboard({ user }) {
     const [errorText, setErrorText] = useState("");
     const [difficulty, setDifficulty] = useState("FUNNY");
     const [story, setStory] = useState(null);
+    const [loading, setLoading] = useState(false);
+
 
     const handleGenerate = async () => {
         try {
+            setLoading(true);
+            setStory(null);
             const data = await generateStory(user.id, {
                 errorText,
                 difficulty
@@ -16,13 +20,14 @@ export default function Dashboard({ user }) {
             setStory(data);
         } catch {
             alert("Generation failed");
+        }finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div style={{ maxWidth: 700, margin: "40px auto" }}>
+        <div className="generator-box" style={{ maxWidth: 700, margin: "40px auto" }}>
             <h1>Error Story Generator</h1>
-
             <textarea
                 rows={5}
                 placeholder="Paste error here..."
@@ -38,7 +43,11 @@ export default function Dashboard({ user }) {
                 <option value="INTERMEDIATE">INTERMEDIATE</option>
             </select>
 
-            <button onClick={handleGenerate}>Generate</button>
+            <button onClick={handleGenerate} disabled={loading}>
+                {loading ? "Generating story..." : "Generate"}
+            </button>
+            {loading && <p className="loading-text" style={{ color: "#93c5fd" }}>please wait...</p>}
+
 
             {story && <StoryViewer story={story} />}
         </div>

@@ -53,39 +53,4 @@ public class UserService {
         return user;
     }
 
-    // UPDATE OWN PROFILE (optional but useful)
-    public User updateProfile(Long id, User updatedUser) {
-
-        User existing = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        if (updatedUser.getUsername() != null &&
-                !updatedUser.getUsername().equals(existing.getUsername())) {
-
-            if (userRepository.findByUsername(updatedUser.getUsername()).isPresent()) {
-                throw new RuntimeException("Username already exists");
-            }
-            existing.setUsername(updatedUser.getUsername());
-        }
-
-        if (updatedUser.getEmail() != null &&
-                !updatedUser.getEmail().equals(existing.getEmail())) {
-
-            if (userRepository.findByEmail(updatedUser.getEmail()).isPresent()) {
-                throw new RuntimeException("Email already exists");
-            }
-            existing.setEmail(updatedUser.getEmail());
-        }
-
-        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
-            existing.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-        }
-
-        return userRepository.save(existing);
-    }
-
-    // DELETE OWN ACCOUNT (optional)
-    public void deleteAccount(Long id) {
-        userRepository.deleteById(id);
-    }
 }

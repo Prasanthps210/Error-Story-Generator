@@ -18,20 +18,6 @@ public class  AuthController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    // REGISTER
-//    @PostMapping("/register")
-//    public User register(@RequestBody User user) {
-//        return userService.register(user);
-//    }
-//
-//    // LOGIN
-//    @PostMapping("/login")
-//    public User login(@RequestBody Map<String, String> data) {
-//        String username = data.get("username");
-//        String password = data.get("password");
-//        return userService.login(username, password);
-//    }
-
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
