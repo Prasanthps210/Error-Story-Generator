@@ -24,9 +24,11 @@ public class StoryController {
 
         String errorText = data.get("errorText");
         String difficulty = data.get("difficulty");
+        String mode = data.get("mode");  // AI or DEFAULT
 
-        return storyService.generateStory(errorText, difficulty, userId);
+        return storyService.generateStory(errorText, difficulty, userId, mode);
     }
+
 
     // READ → Get all stories (Bookshelf) for user
     @GetMapping("/history/{userId}")

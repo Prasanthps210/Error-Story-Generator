@@ -9,6 +9,6 @@ import java.util.List;
 public interface ErrorStoryRepository extends JpaRepository<ErrorStory, Long> {
 
     // Fetch all stories for a particular user (their bookshelf)
-    List<ErrorStory> findByUser(User user);
+    List<ErrorStory> findByUserOrderByIdDesc(User user);
 
 }

@@ -22,6 +22,9 @@ public class ErrorStory {
     private String story;
 
     @Column(columnDefinition = "TEXT")
+    private String example;
+
+    @Column(columnDefinition = "TEXT")
     private String explanation;
 
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -29,4 +32,6 @@ public class ErrorStory {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
 }

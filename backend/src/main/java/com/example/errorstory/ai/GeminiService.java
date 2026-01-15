@@ -20,34 +20,57 @@ public class GeminiService {
 
     public String generateStoryFromGemini(String errorText, String difficulty) {
 
-        String prompt = String.format(
-                """
-            You are an AI that converts programming errors into short, funny stories.
+        String prompt = String.format("""
+            You are an AI that MUST return ONLY valid JSON.
             
-            Return ONLY valid JSON in this exact format:
+            DO NOT write explanations outside JSON.
+            DO NOT write markdown.
+            DO NOT use ```.
+            
+            Return JSON in this exact structure:
             
             {
-              "title": "Short funny error title",
-              "story": "5-6 lines funny story about the error",
-              "fix": "Simple explanation on how to fix it",
-              "example": "Give a small code example ONLY if difficulty is INTERMEDIATE, otherwise leave it empty"
+              "title": "Short funny title",
+              "story": "Story text only",
+              "fix": "Fix must start with FIX: and contain the solution",
+              "example": "Code example only for INTERMEDIATE and ADVANCED, otherwise empty string"
             }
             
             Rules:
-            - Keep everything short.
-            - The story must be funny.
-            - For BEGINNER: simple language, no heavy technical words.
-            - For INTERMEDIATE: include an example code.
-            - For ADVANCED: fix should include debugging tips and best practices.
+            
+            BEGINNER (FUNNY):
+            - Story must be 6–7 funny lines.
+            - Simple language.
+            - "example" must be "" (empty string).
+            
+            INTERMEDIATE:
+            - Story must be 8–9 lines.
+            - Funny + technical.
+            - "fix" must clearly explain the cause.
+            - "example" MUST contain Java code:
+              - First show wrong code
+              - Then correct code
+            
+            ADVANCED:
+            - Story must be professional + slightly humorous.
+            - "fix" must include:
+              - Root cause analysis
+              - Defensive coding
+              - Best practices
+            - "example" MUST contain:
+              - Input validation
+              - Exception handling
+              - Clean code structure
+            
+            If any field is missing, the response is WRONG.
             
             Programming Error:
             %s
             
             Difficulty:
             %s
-            """,
-                errorText, difficulty
-        );
+            """, errorText, difficulty);
+
 
 
         try {
@@ -106,7 +129,17 @@ public class GeminiService {
 
                     if (responseParts != null && !responseParts.isEmpty()) {
                         String text = (String) responseParts.get(0).get("text");
-                        return text != null ? text : "⚠️ No text in response";
+
+                        if (text == null) return "⚠️ No text in response";
+                        text = text.trim();
+                        if (text.startsWith("```")) {
+                            text = text.replaceAll("```json", "")
+                                    .replaceAll("```", "")
+                                    .trim();
+                        }
+
+                        return text;
+
                     }
                 }
             }
