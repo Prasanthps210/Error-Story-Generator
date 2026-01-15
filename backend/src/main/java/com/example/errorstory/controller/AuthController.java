@@ -13,7 +13,7 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-public class AuthController {
+public class  AuthController {
 
     private final UserService userService;
     private final JwtUtil jwtUtil;

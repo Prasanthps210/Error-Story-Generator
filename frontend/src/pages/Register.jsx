@@ -19,34 +19,39 @@ export default function Register({ setPage }) {
     };
 
     return (
-        <div style={{ maxWidth: 400, margin: "100px auto" }}>
-            <h2>Register</h2>
+        <div className="auth-container">
+            <div className="auth-card">
+                <h2>Register</h2>
 
-            <input
-                placeholder="Username"
-                value={form.username}
-                onChange={(e) => setForm({ ...form, username: e.target.value })}
-            />
+                <input
+                    placeholder="Username"
+                    value={form.username}
+                    onChange={(e) => setForm({ ...form, username: e.target.value })}
+                />
 
-            <input
-                placeholder="Email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-            />
+                <input
+                    placeholder="Email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
 
-            <input
-                type="password"
-                placeholder="Password"
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-            />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={form.password}
+                    onChange={(e) => setForm({ ...form, password: e.target.value })}
+                />
 
-            <button onClick={handleRegister}>Create Account</button>
+                <button onClick={handleRegister}>Create Account</button>
 
-            <p>
-                Already have account?{" "}
-                <button onClick={() => setPage("login")}>Login</button>
-            </p>
+                <p>
+                    Already have an account?{" "}
+                    <button className="link-btn" onClick={() => setPage("login")}>
+                        Login
+                    </button>
+                </p>
+            </div>
         </div>
     );
+
 }

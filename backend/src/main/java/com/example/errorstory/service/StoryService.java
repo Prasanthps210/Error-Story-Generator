@@ -9,6 +9,8 @@ import com.example.errorstory.model.User;
 import com.example.errorstory.repository.ErrorStoryRepository;
 import com.example.errorstory.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Map;
 
 import java.util.List;
 
@@ -45,13 +47,32 @@ public class StoryService {
         String explanation = null;
 
         if (internetChecker.isInternetAvailable()) {
-            // 🌐 Gemini mode (FREE!)
+            // 🌐 Gemini mode (Structured + Funny)
+
             String aiResponse = geminiService.generateStoryFromGemini(errorText, difficulty);
 
-            title = "AI Generated Tale";
-            story = aiResponse;
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                Map<String, String> result = mapper.readValue(aiResponse, Map.class);
+
+                title = result.get("title");
+                story = result.get("story");
+                explanation = result.get("fix");
+
+                // Optional: store example somewhere if you add a column later
+                String example = result.get("example");
+                System.out.println("Example Code: " + example);
+
+            } catch (Exception e) {
+                // Fallback if Gemini returns bad JSON
+                title = "AI Error";
+                story = aiResponse;
+                explanation = "Failed to parse structured response";
+                e.printStackTrace();
+            }
 
         } else {
+
             // 🧠 Offline mode
             ParsedError parsed = errorParser.parse(errorText);
             title = "The Tale of " + parsed.getExceptionType();

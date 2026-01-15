@@ -34,7 +34,7 @@ export default function Dashboard({ user }) {
                 value={difficulty}
                 onChange={(e) => setDifficulty(e.target.value)}
             >
-                <option value="FUNNY">FUNNY</option>
+                <option value="BEGINNER">FUNNY</option>
                 <option value="INTERMEDIATE">INTERMEDIATE</option>
             </select>
 

@@ -66,3 +66,31 @@ export async function getHistory(userId) {
 
     return res.json();
 }
+// DELETE STORY
+export async function deleteStory(id) {
+    const res = await fetch(`${BASE_URL}/story/delete/${id}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+    });
+
+    if (!res.ok) {
+        throw new Error("Delete failed");
+    }
+
+    return res.text();
+}
+
+// UPDATE STORY
+export async function updateStory(id, updatedStory) {
+    const res = await fetch(`${BASE_URL}/story/update/${id}`, {
+        method: "PUT",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(updatedStory),
+    });
+
+    if (!res.ok) {
+        throw new Error("Update failed");
+    }
+
+    return res.json();
+}

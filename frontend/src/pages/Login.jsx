@@ -21,28 +21,33 @@ export default function Login({ setUser, setPage }) {
     };
 
     return (
-        <div style={{ maxWidth: 400, margin: "100px auto" }}>
-            <h2>Login</h2>
+        <div className="auth-container">
+            <div className="auth-card">
+                <h2>Login</h2>
 
-            <input
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
+                <input
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
 
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
 
-            <button onClick={handleLogin}>Login</button>
+                <button onClick={handleLogin}>Login</button>
 
-            <p>
-                No account?{" "}
-                <button onClick={() => setPage("register")}>Register</button>
-            </p>
+                <p>
+                    No account?{" "}
+                    <button className="link-btn" onClick={() => setPage("register")}>
+                        Register
+                    </button>
+                </p>
+            </div>
         </div>
     );
+
 }

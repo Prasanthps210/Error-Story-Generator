@@ -21,15 +21,34 @@ public class GeminiService {
     public String generateStoryFromGemini(String errorText, String difficulty) {
 
         String prompt = String.format(
-                "You are a creative storyteller. Turn this programming error into a %s difficulty story.\n\n" +
-                        "Rules:\n" +
-                        "- For BEGINNER: Make it simple, fun, and easy to understand like a fairy tale\n" +
-                        "- For INTERMEDIATE: Add technical explanation of what caused the error\n" +
-                        "- For ADVANCED: Include detailed debugging steps and best practices\n\n" +
-                        "Programming Error:\n%s\n\n" +
-                        "Create an engaging and creative story:",
-                difficulty, errorText
+                """
+            You are an AI that converts programming errors into short, funny stories.
+            
+            Return ONLY valid JSON in this exact format:
+            
+            {
+              "title": "Short funny error title",
+              "story": "5-6 lines funny story about the error",
+              "fix": "Simple explanation on how to fix it",
+              "example": "Give a small code example ONLY if difficulty is INTERMEDIATE, otherwise leave it empty"
+            }
+            
+            Rules:
+            - Keep everything short.
+            - The story must be funny.
+            - For BEGINNER: simple language, no heavy technical words.
+            - For INTERMEDIATE: include an example code.
+            - For ADVANCED: fix should include debugging tips and best practices.
+            
+            Programming Error:
+            %s
+            
+            Difficulty:
+            %s
+            """,
+                errorText, difficulty
         );
+
 
         try {
             // Build request in the exact format Gemini expects
