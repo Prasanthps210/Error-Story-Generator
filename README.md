@@ -1,20 +1,76 @@
-# Error-Story-Generator
+Backend Structure:
 
-error-story-frontend/
+com.example.errorstory
 │
-├── public/
+├── ai
+│   ├── GeminiService
+│   ├── InternetChecker
 │
-├── src/
-│   ├── api/
+├── engine
+│   ├── ErrorParser
+│   ├── ParsedError
+│   ├── OfflineStoryEngine
+│   ├── OfflineResult
+│
+├── model
+│   ├── ErrorStory
+│   ├── User
+│
+├── repository
+│   ├── ErrorStoryRepository
+│   ├── UserRepository
+│
+├── controller
+│   ├── AuthController
+│   ├── StoryController
+│
+├── service
+│   ├── StoryService
+│   ├── UserService
+│
+├── security
+│   ├── JwtFilter
+│   ├── JwtUtil
+│
+├── config
+│   ├── CorsConfig
+│   ├── SecurityConfig
+
+
+
+Frontend Structure:
+frontend
+│
+├── src
+│   │
+│   ├── api
 │   │   └── api.js
 │   │
-│   ├── components/
-│   │   ├── Login.jsx
-│   │   ├── Register.jsx
-│   │   ├── StoryGenerator.jsx
-│   │   ├── StoryViewer.jsx
-│   │   ├── History.jsx
+│   ├── assets
+│   │   └── react.svg
 │   │
-│   ├── App.js
-│   ├── index.js
-│   └── App.css
+│   ├── components
+│   │   ├── Navbar.jsx
+│   │   └── StoryViewer.jsx
+│   │
+│   ├── pages
+│   │   ├── Dashboard.jsx
+│   │   ├── Library.jsx
+│   │   ├── Login.jsx
+│   │   └── Register.jsx
+│   │
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+│
+├── public
+│   └── index.html
+│
+├── node_modules
+│
+└── .gitignore
+
+
+ER Diagram:
+![img.png](img.png)

@@ -53,10 +53,10 @@ public class StoryService {
         String explanation = null;
         String example="";
 
+
         boolean useAI = "AI".equalsIgnoreCase(mode) && internetChecker.isInternetAvailable();
 
-        if (useAI) {
-            // 🌐 AI Mode (Gemini)
+        if (useAI) {  // AI Mode
 
             String aiResponse = geminiService.generateStoryFromGemini(errorText, difficulty);
 
@@ -67,8 +67,8 @@ public class StoryService {
                 title = result.getOrDefault("title", "AI Story");
                 story = result.getOrDefault("story", aiResponse);
                 explanation = result.getOrDefault("fix", "FIX: Not provided by AI");
-
                 example = result.getOrDefault("example", "");
+
 
                 System.out.println("Example Code:\n" + example);
 
@@ -89,6 +89,7 @@ public class StoryService {
             story = offline.getStory();
             explanation = offline.getExplanation();
             example = offline.getExample();
+
         }
 
         ErrorStory errorStory = new ErrorStory();

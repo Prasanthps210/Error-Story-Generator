@@ -14,6 +14,7 @@ public class ErrorParser {
 
         // Detect exception type
         if (errorText.contains("NullPointerException")) {
+
             parsedError.setExceptionType("NullPointerException");
         } else if (errorText.contains("ArrayIndexOutOfBounds")) {
             parsedError.setExceptionType("ArrayIndexOutOfBoundsException");
